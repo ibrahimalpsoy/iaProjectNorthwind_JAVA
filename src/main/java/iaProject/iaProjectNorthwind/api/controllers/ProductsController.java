@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import iaProject.iaProjectNorthwind.business.abstracts.ProductService;
+import iaProject.iaProjectNorthwind.core.utilities.results.DataResult;
 import iaProject.iaProjectNorthwind.entities.concretes.Product;
 
 @RestController
@@ -16,16 +17,17 @@ public class ProductsController {
 
 	private ProductService productService;
 
-	@Autowired // projeyi tarıyo kim ProductService i implemente ettiyse bulunca otomatik
-				// olarak ProductManager p = new ProductManager() yapıyo.
+	// projeyi tarıyo kim ProductService i implemente ettiyse bulunca otomatik
+	// olarak ProductManager p = new ProductManager() yapıyo.
+
+	@Autowired
 	public ProductsController(ProductService productService) {
 		super();
 		this.productService = productService;
 	}
 
 	@GetMapping("/getAll")
-	public List<Product> getAll() {
+	public DataResult<List<Product>> getAll() {
 		return productService.getAll();
 	}
-
 }
